@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAD TURTLE</title>
+
+  <link rel="stylesheet" href="./style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- Música de fondo -->
+  <div style="position:absolute; left:-9999px;">
+    <iframe
+      id="musicFrame"
+      width="1"
+      height="1"
+      src="https://www.youtube.com/embed/mRN_T6JkH-c?autoplay=1&mute=1&loop=1&playlist=mRN_T6JkH-c&controls=0"
+      frameborder="0"
+      allow="autoplay"
+    ></iframe>
+  </div>
+
+  <!-- Overlay genérico -->
+  <div class="in hidden" id="in">
+    <p></p>
+  </div>
+
+  <!-- ===== MENÚ ===== -->
+  <section id="screen-menu" class="screen sec active">
+    <h1>SAD TURTLE</h1>
+
+    <div class="btns">
+      <button id="BtnPlay" class="btn click">
+        <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Botones/BtnPlay.png" />
+      </button>
+      <button id="BtnStore" class="btn click">
+        <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Botones/BtnStore.png" />
+      </button>
+      <div class="btnsDown">
+        <button id="BtnInfo" class="btnH click">
+          <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Botones/BtnAboutUs.png" />
+        </button>
+        <button id="BtnAudio" class="btnH click">
+          <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Botones/BntMute.png" />
+        </button>
+      </div>
+    </div>
+
+    <div id="demo">DEMO</div>
+  </section>
+
+  <!-- ===== NIVEL ===== -->
+  <section id="screen-nivel" class="screen hidden">
+    <div class="carril">
+      <div id="e1" class="C"></div>
+      <div id="e2" class="C"></div>
+      <div id="e3" class="C"></div>
+    </div>
+    <div id="Gameover">
+      <h1>Game Over</h1>
+    </div>
+
+    <div class="uicontrols">
+      <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/ui/Controles.png" alt="">
+    </div>
+
+    <div class="ui">
+      <button class="click" id="exitNivel">
+        <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Botones/BtnClose.png" alt="solver">
+      </button>
+
+      <div class="uicenter">
+        <div id="lives">
+          <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/ui/live.png">
+          <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/ui/live.png">
+          <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/ui/live.png">
+        </div>
+        <div class="time">
+          <img src="https://i.redd.it/clock-by-me-v0-ns53hpldb4391.png?width=1088&format=png&auto=webp&s=c59d67168a52b18b8b2b6a1429fa6f125e97349f" alt="time">
+          <p id="timeNivel">0:00</p>
+        </div>
+      </div>
+
+      <div class="score">
+        <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/ui/coin.png" alt="coin">
+        <p id="scoreNivel"><span>$</span>0</p>
+      </div>
+    </div>
+
+    <div class="contenedor-parallax">
+      <div class="capa capa-3"></div>
+      <div class="capa capa-2"></div>
+      <div class="capa capa-1"></div>
+    </div>
+
+    <div id="playerNivel" class="tortuga">
+      <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Cuerpo%20sin%20patas.png" class="cuerpo">
+      <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Pata%20Delantera.png" class="pata pata-delantera">
+      <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Pata%20trasera.png" class="pata pata-trasera">
+    </div>
+  </section>
+
+  <!-- ===== BONUS (misma estructura de carriles y movimiento que nivel) ===== -->
+  <section id="screen-bonus" class="screen hidden">
+    <div id="bonusScreen">
+      <h1>BONUS</h1>
+    </div>
+
+    <div class="uicontrols">
+      <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/ui/Controles.png" alt="">
+    </div>
+
+    <div id="playerBonus" class="tortuga">
+      <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Cuerpo%20sin%20patas.png" class="cuerpo">
+      <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Pata%20Delantera.png" class="pata pata-delantera">
+      <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Pata%20trasera.png" class="pata pata-trasera">
+    </div>
+
+    <div class="carril">
+      <div class="C"></div>
+      <div class="C"></div>
+      <div class="C"></div>
+    </div>
+
+    <section id="bonus">
+      <div class="ui">
+        <button id="exitBonus" class="click">
+          <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Botones/BtnClose.png" alt="solver">
+        </button>
+        <div class="time">
+          <img src="https://i.redd.it/clock-by-me-v0-ns53hpldb4391.png?width=1088&format=png&auto=webp&s=c59d67168a52b18b8b2b6a1429fa6f125e97349f" alt="time">
+          <p id="timeBonus">0:00</p>
+        </div>
+        <div class="score">
+          <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/ui/coin.png" alt="coin">
+          <span>$</span><p id="scoreBonus">0</p>
+        </div>
+      </div>
+
+      <div class="contenedor-parallax">
+        <div class="capa capa-3"></div>
+        <div class="capa capa-2"></div>
+        <div class="capa capa-1"></div>
+      </div>
+
+      <div id="coin"><img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/ui/coin.png" alt=""></div>
+    </section>
+  </section>
+
+  <!-- ===== STORE ===== -->
+  <section id="screen-store" class="screen hidden">
+    <div class="botones">
+      <div class="boton-salir" id="BtnCerrarStore">
+        <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Botones/BtnClose.png" alt="Salir">
+      </div>
+      <div class="scores">
+        <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/ui/coin.png">
+        <div>
+          <p id="scoreStore">0</p><span>$</span>
+        </div>
+      </div>
+      <div></div>
+    </div>
+
+    <div class="tienda-container">
+      <div class="catalogo">
+        <div class="tarjeta-objeto" data-nombre="Tortuga Marina" data-desc="Una Tortuga marina." data-precio="0" data-img="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Cuerpo%20sin%20patas.png">
+          <div class="imagen-placeholder">
+            <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Cuerpo%20sin%20patas.png" alt="Normal">
+          </div>
+          <div class="etiqueta-precio">Gratis</div>
+        </div>
+
+        <div class="tarjeta-objeto" data-nombre="Tortuga Adivina" data-desc="Una mística criatura que carga el peso del destino en su caparazón. Aumenta la probabilidad de encontrar objetos raros en un 15%." data-precio="150 Monedas" data-img="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/skins/TortugaAdivina.png">
+          <div class="imagen-placeholder">
+            <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/skins/TortugaAdivina.png" alt="Adivina">
+          </div>
+          <div class="etiqueta-precio">150G</div>
+        </div>
+
+        <div class="tarjeta-objeto" data-nombre="Tortuga de Hielo" data-desc="Originaria de las cumbres más frías del norte. Su caparazón de escarcha reduce la velocidad de ataque de los enemigos." data-precio="80 Monedas" data-img="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/skins/TortugaHielo.png">
+          <div class="imagen-placeholder">
+            <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/skins/TortugaHielo.png" alt="Hielo">
+          </div>
+          <div class="etiqueta-precio">80G</div>
+        </div>
+
+        <div class="tarjeta-objeto" data-nombre="Tortuga de Joyas" data-desc="Decorada con los diamantes más finos del reino. Obtiene el doble de monedas al equiparla." data-precio="200 Monedas" data-img="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/skins/TortugaJoyas.png">
+          <div class="imagen-placeholder">
+            <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/skins/TortugaJoyas.png" alt="Joyas">
+          </div>
+          <div class="etiqueta-precio">200G</div>
+        </div>
+
+        <div class="tarjeta-objeto" data-nombre="Tortuga Cósmica" data-desc="Flota sobre el polvo estelar. En su lomo se puede observar el movimiento real de las constelaciones." data-precio="1500 Monedas" data-img="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/skins/TortugaGalaxia.png">
+          <div class="imagen-placeholder">
+            <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/skins/TortugaGalaxia.png" alt="Cosmica">
+          </div>
+          <div class="etiqueta-precio">1500G</div>
+        </div>
+
+        <div class="tarjeta-objeto" data-nombre="Tortuga de Dulce" data-desc="Su caparazón es de chocolate endurecido y exhala un aroma a vainilla constante." data-precio="1500 Monedas" data-img="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/skins/TortugaDulce.png">
+          <div class="imagen-placeholder">
+            <img src="https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/skins/TortugaDulce.png" alt="Dulce">
+          </div>
+          <div class="etiqueta-precio">1500G</div>
+        </div>
+      </div>
+
+      <aside class="panel-descripcion" id="panel-info">
+        <div id="contenido-vacio">
+          <h3>Información</h3>
+          <p>Selecciona una tortuga para ver sus estadísticas y descripción.</p>
+        </div>
+
+        <div id="detalles-producto" style="display: none;">
+          <div class="imagen-detalle">
+            <img id="foto-sidebar" src="" alt="Vista previa">
+          </div>
+          <h2 id="titulo"></h2>
+          <p id="descripcion"></p>
+          <div class="precio-final" id="precio"></div>
+          <button class="btn-comprar">Comprar Articulo</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,725 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Pixelify Sans", sans-serif;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  cursor: default;
+  background-color: #000;
+}
+
+.screen {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.click {
+  cursor: pointer;
+}
+
+/* ===== MENÚ (basado en stile.css) ===== */
+.sec {
+  display: flex;
+}
+
+#screen-menu {
+  z-index: 100;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(https://static.vecteezy.com/system/resources/previews/008/974/775/non_2x/undersea-ocean-world-illustration-underwater-life-with-fishes-and-coral-reefs-on-a-blue-sea-background-vector.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  gap: 100px;
+}
+
+#screen-menu h1 {
+  font-size: 80px;
+}
+
+.btns {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.btn {
+  border: none;
+  width: 367px;
+  height: 150px;
+  transition: 0.5s;
+  display: flex;
+  background-color: transparent;
+}
+
+.btn img {
+  width: 100%;
+}
+
+.btn:hover {
+  scale: 1.1;
+}
+
+.btn:active {
+  scale: 1;
+}
+
+.btnH {
+  width: 80px;
+  height: 80px;
+  background-color: transparent;
+  border: none;
+  transition: 0.5s;
+}
+
+.btnH img {
+  width: 100%;
+}
+
+.btnH:hover {
+  scale: 1.1;
+}
+
+.btnsDown {
+  position: absolute;
+  left: 10px;
+  gap: 10px;
+  bottom: 10px;
+  display: flex;
+  width: calc(80px * 2);
+}
+
+#demo {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  z-index: 999999;
+}
+
+/* ===== OVERLAY GENÉRICO ===== */
+.in {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.658);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+}
+
+.in p {
+  width: 700px;
+  background-color: aliceblue;
+  border-radius: 10px;
+  font-size: xx-large;
+  padding: 20px;
+  box-shadow: 0 0 100px rgb(81, 81, 206);
+}
+
+.in div {
+  z-index: 5;
+  display: flex;
+  gap: 100px;
+}
+
+.in div button {
+  border: none;
+  width: 300px;
+  border-radius: 10px;
+  background-color: transparent;
+  transition: 0.5s;
+}
+
+.in div button img {
+  width: 100%;
+}
+
+.in div button:hover {
+  scale: 1.1;
+}
+
+.in div button:active {
+  scale: 1;
+}
+
+/* ===== UI GENERAL (nivel / bonus) ===== */
+.ui {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+  padding: 10px 100px;
+}
+
+.ui div {
+  display: flex;
+}
+
+.score {
+  color: rgb(78, 67, 67);
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.score img {
+  width: 50px;
+  height: 50px;
+}
+
+#exitNivel,
+#exitBonus {
+  width: 60px;
+  background: none;
+  border: none;
+  position: relative;
+  transition: 0.5s;
+}
+
+#exitNivel img,
+#exitBonus img {
+  width: 100%;
+}
+
+#exitNivel:hover,
+#exitBonus:hover {
+  scale: 1.2;
+}
+
+.time {
+  height: calc(40px + 10px);
+  background-color: rgba(0, 0, 0, 0.363);
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 5px;
+  gap: 10px;
+  color: white;
+  font-size: xx-large;
+}
+
+.time img {
+  width: 40px;
+  height: 40px;
+}
+
+.uicontrols {
+  position: absolute;
+  width: 400px;
+  height: 300px;
+  left: 50px;
+  bottom: 50px;
+  z-index: 999;
+  opacity: 0.7;
+}
+
+.uicenter {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* ajustar barra superior en nivel y bonus un poco hacia abajo */
+#screen-nivel .ui,
+#screen-bonus .ui {
+  top: 20px;
+}
+
+/* vidas (corazones) */
+#lives img {
+  width: 60px;
+  height: auto;
+}
+
+/* ===== NIVEL (basado en style.css) ===== */
+#screen-nivel {
+  background: #dcdcdc;
+}
+
+.carril {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  gap: 40px;
+  flex-direction: column;
+  z-index: 6;
+  position: absolute;
+}
+
+.C {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#playerNivel {
+  z-index: 5;
+  width: 240px;
+  background-color: transparent;
+  position: absolute;
+  left: 50px;
+  top: 60px;
+  transition: 0.3s;
+  height: 120px;
+}
+
+.cuerpo {
+  width: 500px;
+  position: relative;
+  z-index: 2;
+  left: -120px;
+  top: -80px;
+}
+
+.pata {
+  position: absolute;
+  width: 120px;
+  transform-origin: top right;
+}
+
+.pata-delantera {
+  left: 80px;
+  top: 92px;
+  animation: moverDelantera 1s infinite ease-in-out;
+  z-index: 3;
+}
+
+.pata-trasera {
+  left: -60px;
+  top: 80px;
+  animation: moverTrasera 1s infinite ease-in-out;
+}
+
+@keyframes moverDelantera {
+  0% { transform: rotate(-10deg); }
+  50% { transform: rotate(15deg); }
+  100% { transform: rotate(-10deg); }
+}
+
+@keyframes moverTrasera {
+  0% { transform: rotate(-10deg); }
+  50% { transform: rotate(15deg); }
+  100% { transform: rotate(-10deg); }
+}
+
+.contenedor-parallax {
+  position: relative;
+  background-image: url('https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Parallax/FondoPrincipal.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.capa {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+}
+
+.capa-1 {
+  background-image: url('https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Parallax/FondoCapa1.png');
+  z-index: 3;
+  animation: moverIzquierda 20s linear infinite;
+}
+
+.capa-2 {
+  background-image: url('https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Parallax/FondoCapa2.png');
+  z-index: 2;
+  animation: moverIzquierda 40s linear infinite;
+}
+
+.capa-3 {
+  background-image: url('https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Parallax/FondoCapa3.png');
+  z-index: 1;
+  animation: moverIzquierda 80s linear infinite;
+}
+
+@keyframes moverIzquierda {
+  from { background-position: 0 bottom; }
+  to   { background-position: -2000px bottom; }
+}
+
+@keyframes moverDerecha {
+  from { background-position: 0 bottom; }
+  to   { background-position: 2000px bottom; }
+}
+
+.up {
+  transform: rotate(-20deg);
+}
+
+.down {
+  transform: rotate(20deg);
+}
+
+.left {
+  transform: rotate(180deg);
+}
+
+.right {
+  transform: rotate(0deg);
+}
+
+/* basura / obstáculos en los carriles del nivel */
+.basura{
+  z-index: 999;
+  background-color: transparent;
+  width:100px;
+  height:100px;
+  position:absolute;
+  right:-70px;
+  top:20px;
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:center;
+  animation:
+    moverBasura 4s linear forwards,
+    balanceo 1s ease-in-out infinite;
+}
+
+/* movimiento derecha → izquierda */
+@keyframes moverBasura{
+  from{
+    right:-70px;
+  }
+  to{
+    right:110%;
+  }
+}
+
+/* balanceo izquierda ↔ derecha */
+@keyframes balanceo{
+  0%{
+    transform: rotate(-10deg);
+  }
+  50%{
+    transform: rotate(10deg);
+  }
+  100%{
+    transform: rotate(-10deg);
+  }
+}
+
+#Gameover {
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(176, 47, 47, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+#Gameover.show {
+  opacity: 1;
+}
+
+#Gameover h1 {
+  color: #fff;
+  font-size: 120px;
+  font-weight: bold;
+  animation: bonusAnim 0.6s infinite alternate;
+}
+
+@keyframes bonusAnim {
+  from { transform: scale(1); }
+  to   { transform: scale(1.3); }
+}
+
+/* ===== BONUS (basado en bonus.css) ===== */
+#screen-bonus {
+  background-color: rgb(90, 87, 87);
+}
+
+/* Hacer que el parallax del BONUS se comporte como en el nivel
+   y se pegue completamente arriba sin dejar espacio en blanco */
+#screen-bonus .contenedor-parallax {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Mismo movimiento y propiedades que nivel: posición absoluta, mismas clases .up .down .left .right */
+#playerBonus {
+  z-index: 5;
+  width: 240px;
+  background-color: transparent;
+  position: absolute;
+  left: 50px;
+  top: 60px;
+  transition: 0.3s;
+  height: 120px;
+}
+
+#coin {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 200px;
+  top: 150px;
+  background-color: transparent;
+  display: flex;
+  z-index: 4;
+}
+
+#bonusScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+#bonusScreen.show {
+  opacity: 1;
+}
+
+#bonusScreen h1 {
+  color: white;
+  font-size: 120px;
+  font-weight: bold;
+  animation: bonusAnim 0.6s infinite alternate;
+}
+
+/* ===== TIENDA (basado en store.css) ===== */
+#screen-store {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(https://raw.githubusercontent.com/josuedejesus321-crypto/img/refs/heads/main/Parallax/FondoPrincipal.jpg);
+  background-size: cover;
+  background-repeat: repeat;
+}
+
+.tienda-container {
+  display: flex;
+  max-width: 1000px;
+  min-width: 90%;
+  min-height: 600px;
+  margin: 20px auto;
+  background: #2c3e50;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 4px solid #000;
+}
+
+.botones {
+  width: 100%;
+  height: fit-content;
+  position: absolute;
+  z-index: 9;
+  display: flex;
+  gap: 20px;
+  top: 20px;
+  justify-content: space-between;
+}
+
+.scores {
+  height: 40px;
+  display: flex;
+  gap: 10px;
+  background-color: #000;
+  border-radius: 7px;
+  padding: 5px;
+}
+
+.scores div {
+  display: inherit;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+  color: aliceblue;
+}
+
+.scores img {
+  width: 100%;
+}
+
+.boton-salir {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  left: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.boton-salir:hover {
+  scale: 1.1;
+}
+
+.boton-salir img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.catalogo {
+  flex: 2;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  padding: 25px;
+  background: #34495e;
+  max-height: 700px;
+  overflow-y: auto;
+}
+
+.tarjeta-objeto {
+  background: #ecf0f1;
+  border: 3px solid #e74c3c;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.tarjeta-objeto::after {
+  content: "";
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 100px;
+  height: 1000px;
+  background-color: white;
+  transition: 0.5s;
+  transform: rotateZ(-20deg);
+}
+
+.tarjeta-objeto:hover::after {
+  left: 180%;
+}
+
+.tarjeta-objeto:hover {
+  background: #ffdbdb;
+  transform: translateY(-5px);
+}
+
+.imagen-placeholder {
+  height: 150px;
+  width: 100%;
+  background: transparent;
+}
+
+.imagen-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.etiqueta-precio {
+  width: 100%;
+  height: 100%;
+  background: #e74c3c;
+  color: white;
+  font-size: xx-large;
+  font-weight: bold;
+  padding: 8px;
+}
+
+.panel-descripcion {
+  flex: 1;
+  background: #27ae60;
+  color: white;
+  padding: 30px;
+  border-left: 6px solid #1e8449;
+  display: flex;
+  flex-direction: column;
+  font-size: xx-large;
+}
+
+#foto-sidebar {
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.precio-final {
+  font-size: 1.8rem;
+  margin: 15px 0;
+  color: #f1c40f;
+  font-weight: bold;
+}
+
+.btn-comprar {
+  width: 100%;
+  padding: 12px;
+  background: white;
+  border: solid 0px;
+  color: #27ae60;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: auto;
+  font-size: xx-large;
+  transition: 0.5s;
+}
+
+.btn-comprar:hover {
+  scale: 1.1;
+  background-color: #2c3e507f;
+  border: solid 2px white;
+}
+
+.btn-comprar:active {
+  background-color: #ecf0f1;
+}
